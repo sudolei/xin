@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.XinTemplateDetailMapper">
+    
+    <resultMap type="XinTemplateDetail" id="XinTemplateDetailResult">
+        <result property="id"    column="id"    />
+        <result property="templateId"    column="template_id"    />
+        <result property="pgeNum"    column="pge_num"    />
+        <result property="xCenterCoord"    column="x_center_coord"    />
+        <result property="yCenterCoord"    column="y_center_coord"    />
+        <result property="xStartCoord"    column="x_start_coord"    />
+        <result property="yStartCoord"    column="y_start_coord"    />
+        <result property="height"    column="height"    />
+        <result property="width"    column="width"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectXinTemplateDetailVo">
+        select id, template_id, pge_num, x_center_coord, y_center_coord, x_start_coord, y_start_coord, height, width, create_by, update_by, create_time, update_time, remark from xin_template_detail
+    </sql>
+
+    <select id="selectXinTemplateDetailList" parameterType="XinTemplateDetail" resultMap="XinTemplateDetailResult">
+        <include refid="selectXinTemplateDetailVo"/>
+        <where>  
+            <if test="templateId != null "> and template_id = #{templateId}</if>
+        </where>
+    </select>
+    
+    <select id="selectXinTemplateDetailById" parameterType="Long" resultMap="XinTemplateDetailResult">
+        <include refid="selectXinTemplateDetailVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertXinTemplateDetail" parameterType="XinTemplateDetail" useGeneratedKeys="true" keyProperty="id">
+        insert into xin_template_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="templateId != null">template_id,</if>
+            <if test="pgeNum != null">pge_num,</if>
+            <if test="xCenterCoord != null">x_center_coord,</if>
+            <if test="yCenterCoord != null">y_center_coord,</if>
+            <if test="xStartCoord != null">x_start_coord,</if>
+            <if test="yStartCoord != null">y_start_coord,</if>
+            <if test="height != null">height,</if>
+            <if test="width != null">width,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="templateId != null">#{templateId},</if>
+            <if test="pgeNum != null">#{pgeNum},</if>
+            <if test="xCenterCoord != null">#{xCenterCoord},</if>
+            <if test="yCenterCoord != null">#{yCenterCoord},</if>
+            <if test="xStartCoord != null">#{xStartCoord},</if>
+            <if test="yStartCoord != null">#{yStartCoord},</if>
+            <if test="height != null">#{height},</if>
+            <if test="width != null">#{width},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXinTemplateDetail" parameterType="XinTemplateDetail">
+        update xin_template_detail
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="templateId != null">template_id = #{templateId},</if>
+            <if test="pgeNum != null">pge_num = #{pgeNum},</if>
+            <if test="xCenterCoord != null">x_center_coord = #{xCenterCoord},</if>
+            <if test="yCenterCoord != null">y_center_coord = #{yCenterCoord},</if>
+            <if test="xStartCoord != null">x_start_coord = #{xStartCoord},</if>
+            <if test="yStartCoord != null">y_start_coord = #{yStartCoord},</if>
+            <if test="height != null">height = #{height},</if>
+            <if test="width != null">width = #{width},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXinTemplateDetailById" parameterType="Long">
+        delete from xin_template_detail where id = #{id}
+    </delete>
+
+    <delete id="deleteXinTemplateDetailByIds" parameterType="String">
+        delete from xin_template_detail where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
